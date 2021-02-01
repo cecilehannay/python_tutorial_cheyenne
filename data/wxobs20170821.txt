@@ -1,4 +1,4 @@
-                  Temp     Hi    Low   Out    Dew  Wind  Wind   Wind    Hi    Hi   Wind   Heat    THW                Rain    Heat    Cool    In     In    In     In     In   In Air  Wind  Wind    ISS   Arc.
+                 Temperature     Hi    Low   Out    Dew  Wind  Wind   Wind    Hi    Hi   Wind   Heat    THW                Rain    Heat    Cool    In     In    In     In     In   In Air  Wind  Wind    ISS   Arc.
   Date    Time     Out   Temp   Temp   Hum    Pt. Speed   Dir    Run Speed   Dir  Chill  Index  Index   Bar    Rain  Rate    D-D     D-D    Temp   Hum    Dew   Heat    EMC Density  Samp   Tx   Recept  Int.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  8/20/17 12:05a   69.5   69.7   69.3    34   39.9   4.0   WSW   0.33   7.0   WSW   69.5   66.3   66.3   838.6  0.00  0.00   0.000   0.016   69.6    42   45.5   67.2   8.06  .9818    115    1    100.0    5 
