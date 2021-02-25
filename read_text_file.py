@@ -6,9 +6,6 @@ data = datafile.read()
 
 datafile.close()
 
-# DEBUG
-print(type(data))
-
 
 
 
