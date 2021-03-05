@@ -21,7 +21,7 @@ for line in datafile:
     row = line.split()
     datatable['date'].append(row[0])
     datatable['time'].append(row[1])
-    datatable['temperature'].append(row[2])
+    datatable['temperature'].append(float(row[2]))
 
 # print for debug
 print(datatable['temperature'])
