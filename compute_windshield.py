@@ -2,7 +2,7 @@
 
 # Column names and column indices to read
 # created a column dict that points each data variable to its column-index. 
-columns = {'date':0, 'time':1, 'temperature':2, 'windspeed':7} 
+columns = {'date': 0, 'time': 1, 'temperature': 2, 'windspeed': 7}
 
 # Data types for each column (only if non-string)
 types = {'temperature': float,'windspeed':float}
@@ -35,8 +35,23 @@ for line in datafile:
         value = t(row[i])
         datatable[column].append(value)
 
-# print for debug
-print(datatable['temperature'])
-
 # close file
 datafile.close()
+
+# Compute the wind chill temperature
+def compute_windchill(t, v):
+    a = 35.74
+    b = 0.6215
+    c = 35.75
+    d = 0.4275
+
+    v2 = v ** 2
+    wci = a + (b * t) - (c * v2) + (d * t * v2)
+    
+    return(wci)
+
+
+# Compute the wind chill factor
+windchill = []
+for temperature, windspeed in zip(datatable['temperature'], datatable['windspeed']):
+    windchill.append(compute_windchill(temperature, windspeed))
