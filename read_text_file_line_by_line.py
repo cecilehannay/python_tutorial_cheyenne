@@ -1,3 +1,5 @@
+# This script the environment: conda activate python_tutorial
+
 # Initialize data variable
 datatable = [ ]
 
@@ -15,10 +17,10 @@ for _ in range(3):
 for line in datafile:
     row = line.split()
     datatable.append(row)
-    
 
 # print for debug
-print(row)
+print(datatable[1][2:5])
+
 
 # close file
 datafile.close()
