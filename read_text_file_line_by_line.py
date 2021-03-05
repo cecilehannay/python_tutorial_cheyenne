@@ -21,6 +21,5 @@ for line in datafile:
 # print for debug
 print(datatable[1][2:5])
 
-
 # close file
 datafile.close()

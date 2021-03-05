@@ -1,9 +1,19 @@
 # This script the environment: conda activate python_tutorial
 
-# Initialize data variable
-datatable = {'date': [ ],
-    'time':[],
-    'temperature': []}
+# Column names and column indices to read
+# created a column dict that points each data variable to its column-index. 
+columns = {'date':0, 'time':1, 'temperature':2} 
+
+# Data types for each column (only if non-string)
+types = {'temperature': float}
+
+
+# Initialize my datatable variable
+# we initialize the dictionary in a loop 
+# for each variable specified in columns, that key is initialized pointing to an empty list.
+datatable = {}
+for column in columns:
+   datatable[column] = []
 
 
 # open the data file
@@ -19,9 +29,11 @@ for _ in range(3):
 # Use the concept of split() and append()
 for line in datafile:
     row = line.split()
-    datatable['date'].append(row[0])
-    datatable['time'].append(row[1])
-    datatable['temperature'].append(float(row[2]))
+    for column in columns:
+        i = columns[column]
+        t = types.get(column, str)
+        value = t(row[i])
+        datatable[column].append(value)
 
 # print for debug
 print(datatable['temperature'])
