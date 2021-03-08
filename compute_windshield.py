@@ -4,10 +4,10 @@
 
 # Column names and column indices to read
 # created a column dict that points each data variable to its column-index. 
-columns = {'date': 0, 'time': 1, 'temperature': 2, 'windspeed': 7}
+columns = {'date': 0, 'time': 1, 'temperature': 2, 'windspeed': 7, 'windchill': 12}
 
 # Data types for each column (only if non-string)
-types = {'temperature': float,'windspeed':float}
+types = {'temperature': float,'windspeed':float,'windchill':float}
 
 
 # Initialize my datatable variable
@@ -26,7 +26,7 @@ datafile = open(filename, "r")
 # Because the variable _ is never called in the loop we just call it: _
 for _ in range(3):
     datafile.readline()
-
+    
 # read line by line
 # Use the concept of split() and append()
 for line in datafile:
@@ -47,7 +47,7 @@ def compute_windchill(t, v):
     c = 35.75
     d = 0.4275
 
-    v2 = v ** 2
+    v2 = v ** 0.16
     wci = a + (b * t) - (c * v2) + (d * t * v2)
     
     return(wci)
@@ -59,5 +59,11 @@ for temperature, windspeed in zip(datatable['temperature'], datatable['windspeed
     windchill.append(compute_windchill(temperature, windspeed))
 
 # Debug
-print(windchill)
+for windchill_computed, windchill_obs in zip( datatable['windchill'], windchill):
+    print(windchill_computed, windchill_obs, windchill_computed-windchill_obs)
+
+
+# Debug - formatted
+for windchill_computed, windchill_obs in zip( datatable['windchill'], windchill):
+    print(f'{windchill_computed:.2f}', f'{windchill_obs:.2f}', f'{windchill_computed-windchill_obs:.2f}')
 
