@@ -1,4 +1,6 @@
 # This script the environment: conda activate python_tutorial
+# ON the web: https://ncar.github.io/python-tutorial/tutorials/yourfirst.html#first-python-script
+# on youtube: https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw
 
 # Column names and column indices to read
 # created a column dict that points each data variable to its column-index. 
@@ -55,3 +57,7 @@ def compute_windchill(t, v):
 windchill = []
 for temperature, windspeed in zip(datatable['temperature'], datatable['windspeed']):
     windchill.append(compute_windchill(temperature, windspeed))
+
+# Debug
+print(windchill)
+
