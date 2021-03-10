@@ -4,11 +4,10 @@
 
 # Column names and column indices to read
 # created a column dict that points each data variable to its column-index. 
-columns = {'date': 0, 'time': 1, 'temperature': 2, 'windspeed': 7, 'windchill': 12}
+columns = {'date': 0, 'time': 1, 'temperature': 2, 'humidity': 5, 'heatindex': 13}
 
 # Data types for each column (only if non-string)
-types = {'temperature': float,'windspeed':float,'windchill':float}
-
+types = {'temperature': float,'humidity':float,'heatindex':float}
 
 # Initialize my datatable variable
 # we initialize the dictionary in a loop 
@@ -17,7 +16,7 @@ datatable = {}
 for column in columns:
    datatable[column] = []
 
-
+#############
 # open the data file
 filename = "data/wxobs20170821.txt"
 datafile = open(filename, "r")
@@ -40,30 +39,36 @@ for line in datafile:
 # close file
 datafile.close()
 
-# Compute the wind chill temperature
-def compute_windchill(t, v):
-    a = 35.74
-    b = 0.6215
-    c = 35.75
-    d = 0.4275
 
-    v2 = v ** 0.16
-    wci = a + (b * t) - (c * v2) + (d * t * v2)
-    
-    return(wci)
+ # Compute the heat index
+def compute_heatindex(t, rh_pct):
+    a = -42.379
+    b = 2.04901523
+    c = 10.14333127
+    d = -0.22475541
+    e = -0.00683783
+    f = -0.05481717
+    g = 0.00122874
+    h = 0.00085282
+    i = -0.00000199
 
+    rh = rh_pct / 100
 
-# Compute the wind chill factor
-windchill = []
-for temperature, windspeed in zip(datatable['temperature'], datatable['windspeed']):
-    windchill.append(compute_windchill(temperature, windspeed))
-
-# Debug
-for windchill_computed, windchill_obs in zip( datatable['windchill'], windchill):
-    print(windchill_computed, windchill_obs, windchill_computed-windchill_obs)
+    hi = a + (b * t) + (c * rh) + (d * t * rh)
+    + (e * t**2) + (f * rh**2) + (g * t**2 * rh)
+    + (h * t * rh**2) + (i * t**2 * rh**2)
+    return hi
 
 
-# Debug - formatted
-for windchill_computed, windchill_obs in zip( datatable['windchill'], windchill):
-    print(f'{windchill_computed:.2f}', f'{windchill_obs:.2f}', f'{windchill_computed-windchill_obs:.2f}')
+# Compute the heat index
+heatindex = []
+for temperature, humidity in zip(datatable['temperature'], datatable['humidity']):
+    heatindex.append(compute_heatindex(temperature, humidity))
+
+# Output
+print('------- ------  -----  ----- ------')
+print(' Date    Time   HIcomp HIobs  Diff ')
+print('------- ------  -----  ----- ------')
+for date, time, heatindex_computed, heatindex_obs in zip(datatable['date'], datatable['time'], datatable['heatindex'], heatindex):
+    print(f'{date} {time} {heatindex_computed:6.2f} {heatindex_obs:6.2f} {heatindex_computed-heatindex_obs:6.2f}')
 
