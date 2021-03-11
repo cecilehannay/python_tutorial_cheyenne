@@ -1,4 +1,5 @@
 def read_data(columns, types={}, filename = "data/wxobs20170821.txt"):
+
     """
     Read data from CU Boulder Weather Station data file
 
