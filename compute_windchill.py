@@ -1,3 +1,5 @@
+from read_data import read_data
+
 # This script the environment: conda activate python_tutorial
 # ON the web: https://ncar.github.io/python-tutorial/tutorials/yourfirst.html#first-python-script
 # on youtube: https://www.youtube.com/channel/UCoZPBqJal5uKpO8ZiwzavCw
@@ -17,28 +19,13 @@ datatable = {}
 for column in columns:
    datatable[column] = []
 
+#############
+# Read data from  CU Boulder Weather Station data file
 
-# open the data file
-filename = "data/wxobs20170821.txt"
-datafile = open(filename, "r")
+datatable = read_data(columns, types=types)
 
-# skip the 3 first lines
-# Because the variable _ is never called in the loop we just call it: _
-for _ in range(3):
-    datafile.readline()
-    
-# read line by line
-# Use the concept of split() and append()
-for line in datafile:
-    row = line.split()
-    for column in columns:
-        i = columns[column]
-        t = types.get(column, str)
-        value = t(row[i])
-        datatable[column].append(value)
+###############
 
-# close file
-datafile.close()
 
 # Compute the wind chill temperature
 def compute_windchill(t, v):

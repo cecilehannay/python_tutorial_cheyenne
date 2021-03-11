@@ -1,5 +1,4 @@
 def read_data(columns, types={}, filename = "data/wxobs20170821.txt"):
-
     """
     Read data from CU Boulder Weather Station data file
 
@@ -10,8 +9,8 @@ def read_data(columns, types={}, filename = "data/wxobs20170821.txt"):
       filename: The string path pointing to the CU Boulder Weather
             Station data file
     """
-
-    # Initialize my datatable variable 
+     
+    # Initialize my datatable variable
     # we initialize the dictionary in a loop 
     # for each variable specified in columns, that key is initialized pointing to an empty list.
     datatable = {}
@@ -39,5 +38,5 @@ def read_data(columns, types={}, filename = "data/wxobs20170821.txt"):
 
     # close file
     datafile.close()
-
-return data
+    
+    return datatable
